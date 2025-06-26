@@ -377,7 +377,6 @@ def construct_analogues(data_gcm, obs_coarse, obs_fine,
     # make the constructed analogues using dask.delayed
     ntime = len(data_gcm.time)
     da_list = []
-    print("1")
     for i in range(ntime):
          CA_sample = construct_analogue_onetime(data_gcm_dd.isel(time = i),
                                                 obs_coarse_dd,
@@ -391,7 +390,6 @@ def construct_analogues(data_gcm, obs_coarse, obs_fine,
                                                 transform = transform, 
                                                 penalty = penalty)
          da_list.append(CA_sample)
-    print("2")
     # call compute to process the data
     da_list_comp = dask.compute(da_list)[0]
     # concatenate all the downscaled data together over the time dimension
@@ -404,7 +402,6 @@ def construct_analogues(data_gcm, obs_coarse, obs_fine,
         data_CA.to_netcdf(fout)
         return None
     else:
-        print("3")
         return data_CA
 
 
